@@ -1,9 +1,8 @@
 class Sequence
 
-  attr_reader :name, :events, :io
+  attr_reader :events, :io
 
-  def initialize(name)
-    @name = name
+  def initialize
     @events = []
   end
 
@@ -11,9 +10,9 @@ class Sequence
     @events << event
   end
 
-  def write!
+  def write!(io)
 
-    @io = File.open(File.expand_path("../../dist/#{name}.mid", __FILE__), "wb")
+    @io = io
 
     # header chunk
     io.print "MThd"
