@@ -1,12 +1,15 @@
 class Sequence
 
-  attr_reader :events, :io
+  attr_reader :division, :delta_time, :events, :io
 
-  def initialize
+  def initialize(division = 248)
+    @division = division
+    @delta_time = 0
     @events = []
   end
 
   def <<(event)
+    event.unshift delta_time
     @events << event
   end
 
@@ -19,7 +22,7 @@ class Sequence
     write32 6   # length
     write16 0   # format
     write16 1   # tracks
-    write16 248 # division
+    write16 division
 
     # track chunk
     io.print "MTrk"
