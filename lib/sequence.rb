@@ -9,8 +9,13 @@ class Sequence
   end
 
   def <<(event)
-    event.unshift delta_time
-    @events << event
+    event.unshift variable_length_byte_array(delta_time)
+    @delta_time = 0
+    @events << event.flatten
+  end
+
+  def advance_time(quarter_notes)
+    @delta_time += quarter_notes * division
   end
 
   def write!(io)
@@ -48,5 +53,16 @@ class Sequence
     io.putc((val >> 16) & 0xff)
     io.putc((val >> 8) & 0xff)
     io.putc(val & 0xff)
+  end
+
+  def variable_length_byte_array(value)
+    buffer = []
+    buffer << (value & 0x7f)
+    value = (value >> 7)
+    while value > 0
+      buffer << (0x80 + (value & 0x7f))
+      value = (value >> 7)
+    end
+    buffer.reverse
   end
 end
