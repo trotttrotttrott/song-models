@@ -11,7 +11,7 @@ sequence = Sequence.new
 
 sequence << Event.marker("Intro")
 sequence << Event.tempo(130)
-sequence << Event.time_signature(4, 2) # 4/4 (denominator squared is actual beat value)
+sequence << Event.time_signature(4, 2) # 4/4 (2**denominator is actual beat value)
 
 sequence.advance_time 16 # advance 16 quarter notes from last event
 
