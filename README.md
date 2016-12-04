@@ -23,3 +23,5 @@ sequence << Event.end_track
 
 sequence.write! File.open(File.expand_path("song.mid", File.dirname(__FILE__)), "wb")
 ```
+
+Organizing this subset of MIDI functionality was very much facilitated by [jimm/midilib](https://github.com/jimm/midilib).
