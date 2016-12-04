@@ -1,4 +1,4 @@
-# song-models
+# song-structures
 
 Generates MIDI data for mapping song structures in sequencers. Typically, this would be done manually with a lot of pointing and clicking.
 
